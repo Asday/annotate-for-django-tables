@@ -7,7 +7,7 @@ class StudentQuerySet(models.QuerySet):
         from .models import AcademicStanding  # Avoid circular import
 
         academic_standings = AcademicStanding.objects \
-            .filter(student=models.OuterRef('id')) \
+            .filter(student=models.OuterRef('pk')) \
             .for_year(year) \
             .values('standing')
 
