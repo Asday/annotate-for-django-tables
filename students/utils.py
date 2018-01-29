@@ -1,6 +1,8 @@
 from datetime import date
 from random import randint
 
+from .models import AcademicStanding, Student
+
 
 def create_dummy_data():
     students = [Student.objects.create() for _ in range(30)]
