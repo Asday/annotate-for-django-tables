@@ -6,14 +6,12 @@ class StudentQuerySet(models.QuerySet):
     def with_academic_standings(self, year, field_name='academic_standings'):
         from .models import AcademicStanding  # Avoid circular import
 
-        kwargs = {
-            field_name: models.Subquery(
-                AcademicStanding.objects \
-                    .filter(student=models.OuterRef('id')) \
-                    .for_year(year) \
-                    .values('standing'),
-            ),
-        }
+        academic_standings = AcademicStanding.objects \
+            .filter(student=models.OuterRef('id')) \
+            .for_year(year) \
+            .values('standing')
+
+        kwargs = {field_name: models.Subquery(academic_standings)}
         return self.annotate(**kwargs)
 
 
