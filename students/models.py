@@ -2,6 +2,8 @@ from random import choice, randint
 
 from django.db import models
 
+from .managers import AcademicStandingManager, StudentManager
+
 
 vowels = 'aeiou'
 consonants = 'bcdfghjklmnpqrstvwxyz'
@@ -25,6 +27,8 @@ def generate_name():
 class Student(models.Model):
     name = models.CharField(max_length=20, default=generate_name)
 
+    objects = StudentManager()
+
     def __str__(self):
         return self.name
 
@@ -37,3 +41,5 @@ class AcademicStanding(models.Model):
     )
     standing = models.PositiveIntegerField()
     year = models.DateField()
+
+    objects = AcademicStandingManager()
