@@ -8,7 +8,10 @@ class StudentQuerySet(models.QuerySet):
 
         kwargs = {
             field_name: models.Subquery(
-                AcademicStanding.objects.for_year(year).values('standing'),
+                AcademicStanding.objects \
+                    .filter(student=models.OuterRef('id')) \
+                    .for_year(year) \
+                    .values('standing'),
             ),
         }
         return self.annotate(**kwargs)
