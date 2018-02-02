@@ -8,6 +8,7 @@ This repo was produced as an answer to [this question](https://stackoverflow.com
 git clone git@github.com:Asday/annotate-for-django-tables.git
 cd annotate-for-django-tables
 mkvirtualenv --python=$(which python3.6) annotate-for-django-tables
+pip install -r requirements.txt
 python manage.py migrate
 python manage.py shell
 ```
